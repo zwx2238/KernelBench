@@ -1,6 +1,16 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = (
+    "z[b, n] = x[b, k] @ W^T[k, n] + bias[n]; "
+    "p[b, 0] = log(sum_n(exp(z[b, n]))); "
+    "a[b, 0] = LeakyReLU(LeakyReLU(p[b, 0], 0.01), 0.01); "
+    "out[b, 0] = GELU(GELU(a[b, 0]))"
+)
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Model that performs a matrix multiplication (Gemm), followed by LogSumExp, LeakyReLU, 

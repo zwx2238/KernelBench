@@ -1,6 +1,15 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = (
+    "z[b, n] = x[b, k] @ W^T[k, n] + bias[n]; "
+    "g[b, n] = GELU(z[b, n]); "
+    "out[b, n] = exp(g[b, n]) / sum_n(exp(g[b, n]))"
+)
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Simple model that performs a matrix multiplication, applies GELU, and then applies Softmax.

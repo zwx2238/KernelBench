@@ -1,6 +1,17 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = (
+    "z[b, n] = x[b, k] @ W^T[k, n] + bias[n] - subtract[n]; "
+    "p[b, 0] = mean_n(z[b, n]); "
+    "q[b, 0] = log(sum_{j in {0}}(exp(p[b, j]))) = p[b, 0]; "
+    "g[b, 0] = GELU(q[b, 0]); "
+    "out[b, k] = x[b, k] + g[b, 0]"
+)
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Model that performs a series of operations: Gemm, Subtract, GlobalAvgPool, LogSumExp, GELU, and ResidualAdd.

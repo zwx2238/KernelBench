@@ -1,6 +1,17 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = (
+    "z[b, n] = x[b, k] @ W^T[k, n] + bias[n]; "
+    "z_grouped[b, g, c] = z[b, g*C_g + c] with C_g = out_features / num_groups; "
+    "mu[b, g] = mean_c(z_grouped[b, g, c]); var[b, g] = var_c(z_grouped[b, g, c]); "
+    "n_norm[b, g, c] = (z_grouped[b, g, c] - mu[b, g]) / sqrt(var[b, g] + eps) * gamma[g*C_g + c] + beta[g*C_g + c]; "
+    "out[b, n] = clamp(n_norm_flat[b, n], hardtanh_min, hardtanh_max)"
+)
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Simple model that performs a GEMM, applies Group Normalization, and then HardTanh.

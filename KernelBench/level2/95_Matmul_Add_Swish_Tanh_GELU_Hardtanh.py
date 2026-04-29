@@ -1,6 +1,17 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = (
+    "z[b, n] = x[b, k] @ W^T[k, n] + bias[n] + add_value[n]; "
+    "s[b, n] = sigmoid(z[b, n]) * z[b, n]; "
+    "t[b, n] = tanh(s[b, n]); "
+    "g[b, n] = GELU(t[b, n]); "
+    "out[b, n] = clamp(g[b, n], -1, 1)"
+)
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Simple model that performs a matrix multiplication, adds a value, applies Swish, Tanh, GELU, and Hardtanh activation functions.

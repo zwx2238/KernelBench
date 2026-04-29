@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = "z[b, n] = x[b, k] @ W^T[k, n] + bias[n]; out[b, n] = sigmoid(z[b, n]) * scaling_factor + z[b, n]"
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Model implementing the pattern "Gemm_Sigmoid_Scaling_ResidualAdd".

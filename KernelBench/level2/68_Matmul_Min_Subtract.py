@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = "out[b, n] = min(x[b, k] @ W^T[k, n] + bias[n], constant) - constant"
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Simple model that performs a matrix multiplication, applies minimum, and subtracts a constant.

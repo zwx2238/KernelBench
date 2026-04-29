@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = "out[b, 0] = sum_{n}(sigmoid(x[b, k] @ W^T[k, n] + bias[n]))"
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Simple model that performs a matrix multiplication, applies sigmoid, and sums the result.

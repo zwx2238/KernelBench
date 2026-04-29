@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = "out[b, 0] = scaling_factor * sum_{n}((x[b, k] @ W^T[k, n]) / 2)"
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Model that performs a matrix multiplication, division, summation, and scaling.

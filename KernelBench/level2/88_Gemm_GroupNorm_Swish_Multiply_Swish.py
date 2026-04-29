@@ -1,6 +1,19 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = (
+    "z[b, n] = x[b, k] @ W^T[k, n] + bias[n]; "
+    "z_grouped[b, g, c] = z[b, g*C_g + c] with C_g = out_features / num_groups; "
+    "mu[b, g] = mean_c(z_grouped[b, g, c]); var[b, g] = var_c(z_grouped[b, g, c]); "
+    "n_norm[b, g, c] = (z_grouped[b, g, c] - mu[b, g]) / sqrt(var[b, g] + eps) * gamma[g*C_g + c] + beta[g*C_g + c]; "
+    "s1[b, n] = sigmoid(n_norm_flat[b, n]) * n_norm_flat[b, n]; "
+    "m[b, n] = s1[b, n] * multiply_weight[n]; "
+    "out[b, n] = sigmoid(m[b, n]) * m[b, n]"
+)
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Model that performs a GEMM, GroupNorm, Swish, Multiply, and Swish operations.

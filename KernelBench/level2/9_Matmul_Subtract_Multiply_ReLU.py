@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = "out[b, n] = ReLU((x[b, k] @ W^T[k, n] + bias[n] - subtract_value) * multiply_value)"
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Model that performs a matrix multiplication, subtraction, multiplication, and ReLU activation.

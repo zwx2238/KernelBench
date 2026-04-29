@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 
+
+FORMULA = "z[b, n] = x[b, k] @ W^T[k, n] + bias[n]; u[b, n] = z * tanh(softplus(z)); out[b, n] = u * tanh(softplus(u))"
+DYNAMIC_AXIS = ["B"]
+
+
 class Model(nn.Module):
     """
     Simple model that performs a matrix multiplication, applies Mish, and applies Mish again.
