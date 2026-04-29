@@ -24,6 +24,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch as th
 
+FORMULA = "a[B, N, K] = softmax(BN(x[B*N, D] @ clusters[D, K+G]))[:,:K]; vlad[B, D*K] = L2Norm(L2Norm((a[B, K, N] @ x[B, N, D])^T - sum(a, dim=1) * clusters2[D, K]))"
+DYNAMIC_AXIS = ["B", "N"]
 
 class Model(nn.Module):
     def __init__(self, cluster_size, feature_size, ghost_clusters):

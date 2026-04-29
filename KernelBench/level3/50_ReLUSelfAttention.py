@@ -5,6 +5,9 @@ import math
 
 # From https://github.com/karpathy/minGPT/blob/master/mingpt/model.py
 
+FORMULA = "att[nh, t_q, t_k] = relu(mask((Q[nh, t_q, hs] @ K[nh, t_k, hs]^T) / sqrt(hs))); y[B, T, C] = concat_heads(att @ V[nh, t_k, hs])"
+DYNAMIC_AXIS = ["B", "T"]
+
 class NewGELU(nn.Module):
     """
     Implementation of the GELU activation function currently in Google BERT repo (identical to OpenAI GPT).

@@ -5,6 +5,9 @@ import math
 
 # From https://github.com/karpathy/minGPT/blob/master/mingpt/model.py
 
+FORMULA = "att[nh, t_q, t_k] = softmax(mask((Q[nh, t_q, hs] @ K[nh, t_k, hs]^T) / sqrt(hs))); y[B, T, C] = c_proj(dropout(concat_heads(att @ V[nh, t_k, hs])))"
+DYNAMIC_AXIS = ["B", "T"]
+
 class Model(nn.Module):
     """
     A vanilla multi-head masked self-attention layer with a projection at the end.
