@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 FORMULA = "out[b, c, h, w] = gamma[c] * (x[b, c, h, w] - mean_g) / sqrt(var_g + eps) + beta[c]"
-DYNAMIC_AXIS = ["B", "H", "W"]
+DYNAMIC_AXIS = ["B"]
 
 class Model(nn.Module):
     """

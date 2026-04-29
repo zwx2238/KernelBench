@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 FORMULA = "out[b, 0, d] = sum_i x[b, i, d]"
-DYNAMIC_AXIS = ["B", "D"]
+DYNAMIC_AXIS = ["B"]
 
 class Model(nn.Module):
     """

@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 
-FORMULA = "out[n, m, l] = A[n, m, k] @ B[k, l]"
-DYNAMIC_AXIS = ["N", "M", "L"]
+FORMULA = "out[b, m, n] = A[b, m, k] @ B[k, n]"
+DYNAMIC_AXIS = ["B", "M"]
 
 class Model(nn.Module):
     """
