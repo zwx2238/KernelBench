@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 
+FORMULA = "out = mean_b(-log_softmax(predictions[b, c])[targets[b]])"
+DYNAMIC_AXIS = ["B"]
+
 class Model(nn.Module):
     """
     A model that computes Cross Entropy Loss for multi-class classification tasks.

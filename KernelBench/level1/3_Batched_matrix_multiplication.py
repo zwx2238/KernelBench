@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 
+FORMULA = "out[b, m, n] = A[b, m, k] @ B[b, k, n]"
+DYNAMIC_AXIS = ["B", "M", "N"]
+
 class Model(nn.Module):
     """
     Performs batched matrix multiplication (C = A * B) where A, B, and C have the same batch dimension.

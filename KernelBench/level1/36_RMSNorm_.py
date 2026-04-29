@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 
+FORMULA = "out[b, c, h, w] = x[b, c, h, w] / sqrt(mean_j(x[b, j, h, w]^2) + eps)"
+DYNAMIC_AXIS = ["B", "H", "W"]
+
 class Model(nn.Module):
     """
     Simple model that performs RMS Normalization.

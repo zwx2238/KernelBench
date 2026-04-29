@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 
+FORMULA = "out[b, 0, d] = sum_i x[b, i, d]"
+DYNAMIC_AXIS = ["B", "D"]
+
 class Model(nn.Module):
     """
     Simple model that performs sum reduction over a specified dimension.

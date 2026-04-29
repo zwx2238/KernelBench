@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 
+FORMULA = "out[n, m, l] = A[n, m, k] @ B[k, l]"
+DYNAMIC_AXIS = ["N", "M", "L"]
+
 class Model(nn.Module):
     """
     Performs 3D tensor-matrix multiplication.
